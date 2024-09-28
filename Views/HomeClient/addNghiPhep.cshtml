@@ -1,0 +1,123 @@
+﻿@model webintern.Models.leave_requests
+
+@{
+    ViewBag.Title = "addNghiPhep";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("form").validate({
+                rules: {
+                    ngay_batdau: {
+                        required: true,
+                        date: true,
+                        greaterThanRequestDate: true
+                    },
+                    ngay_ketthuc: {
+                        required: true,
+                        date: true,
+                        greaterThanStartDate: true
+                    }
+                },
+                messages: {
+                    ngay_batdau: {
+                        required: "Please enter the start date",
+                        date: "Please enter a valid date",
+                        greaterThanRequestDate: "The start date must be after or on the request date"
+                    },
+                    ngay_ketthuc: {
+                        required: "Please enter the end date",
+                        date: "Please enter a valid date",
+                        greaterThanStartDate: "The end date must be after the start date"
+                    }
+                }
+            });
+
+            $.validator.addMethod("greaterThanRequestDate", function (value, element) {
+                var requestDate = new Date($("#request_date").val());
+                var startDate = new Date(value);
+                return startDate >= requestDate;
+            });
+
+            $.validator.addMethod("greaterThanStartDate", function (value, element) {
+                var startDate = new Date($("#ngay_batdau").val());
+                var endDate = new Date(value);
+                return endDate >= startDate;
+            });
+        });
+    </script>
+
+}
+
+<h2>addNghiPhep</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>leave_requests</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ma_nhanvien, "Mã nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DisplayFor(model => model.ma_nhanvien, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.HiddenFor(model => model.ma_nhanvien) <!-- Dùng Hidden để gửi dữ liệu lên server -->
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ngay_batdau, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ngay_batdau, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.ngay_batdau, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ngay_ketthuc, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ngay_ketthuc, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.ngay_ketthuc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lydo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lydo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lydo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.request_date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.request_date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @Html.ValidationMessageFor(model => model.request_date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("HomeClient", "Index")
+</div>

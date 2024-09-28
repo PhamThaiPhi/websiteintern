@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/css/loginAdmin.css">
+</head>
+<body>
+    <div class="form">
+
+        <div id="login">
+            
+            <form action="@Url.Action("KiemTraDangNhap", "LoginUser")" method="post">
+                <div class="field-wrap">
+                    <input type="text" required name="username" placeholder="Email" />
+                </div>
+                <div class="field-wrap">
+
+                    <input type="password" required name="password" placeholder="Mật khẩu" />
+                </div>
+                <button class="button button-block">
+                    <span>Đăng nhập</span>
+                </button>
+                
+            </form>
+        </div>
+    </div>
+</body>
+

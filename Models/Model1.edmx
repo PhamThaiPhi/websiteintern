@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLNSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bangluong">
+          <Key>
+            <PropertyRef Name="ma_luong" />
+          </Key>
+          <Property Name="ma_luong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ma_nhanvien" Type="int" />
+          <Property Name="luongthang" Type="date" Nullable="false" />
+          <Property Name="bonuses" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="leave_requests">
+          <Key>
+            <PropertyRef Name="leave_id" />
+          </Key>
+          <Property Name="leave_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ma_nhanvien" Type="int" />
+          <Property Name="ngay_batdau" Type="date" Nullable="false" />
+          <Property Name="ngay_ketthuc" Type="date" Nullable="false" />
+          <Property Name="lydo" Type="nvarchar(max)" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="request_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nhanvien">
+          <Key>
+            <PropertyRef Name="ma_nhanvien" />
+          </Key>
+          <Property Name="ma_nhanvien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ngaysinh" Type="date" Nullable="false" />
+          <Property Name="gioitinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="diachi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="phone_number" Type="nvarchar" MaxLength="20" />
+          <Property Name="ma_phongban" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Passwords" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="luong" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="roles" Type="int" />
+          <Property Name="trangthai" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="phongban">
+          <Key>
+            <PropertyRef Name="ma_phongban" />
+          </Key>
+          <Property Name="ma_phongban" Type="int" Nullable="false" />
+          <Property Name="ten_phongban" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ma_quanli" Type="int" />
+        </EntityType>
+        <EntityType Name="user_accounts">
+          <Key>
+            <PropertyRef Name="ma_taikhoan" />
+          </Key>
+          <Property Name="ma_taikhoan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ma_nhanvien" Type="int" />
+          <Property Name="taikhoan" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="matkhau" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="int" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NameUS" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__bangluong__ma_nh__300424B4">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="bangluong" Type="Self.bangluong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="bangluong">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__leave_req__ma_nh__2D27B809">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="leave_requests" Type="Self.leave_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="leave_requests">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nhanvien__ma_pho__2A4B4B5E">
+          <End Role="phongban" Type="Self.phongban" Multiplicity="0..1" />
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phongban">
+              <PropertyRef Name="ma_phongban" />
+            </Principal>
+            <Dependent Role="nhanvien">
+              <PropertyRef Name="ma_phongban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nhanvien__roles__29572725">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1" />
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="nhanvien">
+              <PropertyRef Name="roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_acco__ma_nh__33D4B598">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="user_accounts" Type="Self.user_accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="user_accounts">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_phongban_quanli">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="phongban" Type="Self.phongban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="phongban">
+              <PropertyRef Name="ma_quanli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLNSModelStoreContainer">
+          <EntitySet Name="bangluong" EntityType="Self.bangluong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="leave_requests" EntityType="Self.leave_requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nhanvien" EntityType="Self.nhanvien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="phongban" EntityType="Self.phongban" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_accounts" EntityType="Self.user_accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__bangluong__ma_nh__300424B4" Association="Self.FK__bangluong__ma_nh__300424B4">
+            <End Role="nhanvien" EntitySet="nhanvien" />
+            <End Role="bangluong" EntitySet="bangluong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__leave_req__ma_nh__2D27B809" Association="Self.FK__leave_req__ma_nh__2D27B809">
+            <End Role="nhanvien" EntitySet="nhanvien" />
+            <End Role="leave_requests" EntitySet="leave_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nhanvien__ma_pho__2A4B4B5E" Association="Self.FK__nhanvien__ma_pho__2A4B4B5E">
+            <End Role="phongban" EntitySet="phongban" />
+            <End Role="nhanvien" EntitySet="nhanvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nhanvien__roles__29572725" Association="Self.FK__nhanvien__roles__29572725">
+            <End Role="UserGroup" EntitySet="UserGroup" />
+            <End Role="nhanvien" EntitySet="nhanvien" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_acco__ma_nh__33D4B598" Association="Self.FK__user_acco__ma_nh__33D4B598">
+            <End Role="nhanvien" EntitySet="nhanvien" />
+            <End Role="user_accounts" EntitySet="user_accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_phongban_quanli" Association="Self.FK_phongban_quanli">
+            <End Role="nhanvien" EntitySet="nhanvien" />
+            <End Role="phongban" EntitySet="phongban" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLNSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bangluong">
+          <Key>
+            <PropertyRef Name="ma_luong" />
+          </Key>
+          <Property Name="ma_luong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ma_nhanvien" Type="Int32" />
+          <Property Name="luongthang" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="bonuses" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="nhanvien" Relationship="Self.FK__bangluong__ma_nh__300424B4" FromRole="bangluong" ToRole="nhanvien" />
+        </EntityType>
+        <EntityType Name="leave_requests">
+          <Key>
+            <PropertyRef Name="leave_id" />
+          </Key>
+          <Property Name="leave_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ma_nhanvien" Type="Int32" />
+          <Property Name="ngay_batdau" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ngay_ketthuc" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lydo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="request_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="nhanvien" Relationship="Self.FK__leave_req__ma_nh__2D27B809" FromRole="leave_requests" ToRole="nhanvien" />
+        </EntityType>
+        <EntityType Name="nhanvien">
+          <Key>
+            <PropertyRef Name="ma_nhanvien" />
+          </Key>
+          <Property Name="ma_nhanvien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ngaysinh" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gioitinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="diachi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ma_phongban" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passwords" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="luong" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="roles" Type="Int32" />
+          <Property Name="trangthai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="bangluongs" Relationship="Self.FK__bangluong__ma_nh__300424B4" FromRole="nhanvien" ToRole="bangluong" />
+          <NavigationProperty Name="leave_requests" Relationship="Self.FK__leave_req__ma_nh__2D27B809" FromRole="nhanvien" ToRole="leave_requests" />
+          <NavigationProperty Name="phongban" Relationship="Self.FK__nhanvien__ma_pho__2A4B4B5E" FromRole="nhanvien" ToRole="phongban" />
+          <NavigationProperty Name="UserGroup" Relationship="Self.FK__nhanvien__roles__29572725" FromRole="nhanvien" ToRole="UserGroup" />
+          <NavigationProperty Name="user_accounts" Relationship="Self.FK__user_acco__ma_nh__33D4B598" FromRole="nhanvien" ToRole="user_accounts" />
+          <NavigationProperty Name="phongbans" Relationship="Self.FK_phongban_quanli" FromRole="nhanvien" ToRole="phongban" />
+        </EntityType>
+        <EntityType Name="phongban">
+          <Key>
+            <PropertyRef Name="ma_phongban" />
+          </Key>
+          <Property Name="ma_phongban" Type="Int32" Nullable="false" />
+          <Property Name="ten_phongban" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ma_quanli" Type="Int32" />
+          <NavigationProperty Name="nhanviens" Relationship="Self.FK__nhanvien__ma_pho__2A4B4B5E" FromRole="phongban" ToRole="nhanvien" />
+          <NavigationProperty Name="nhanvien" Relationship="Self.FK_phongban_quanli" FromRole="phongban" ToRole="nhanvien" />
+        </EntityType>
+        <EntityType Name="user_accounts">
+          <Key>
+            <PropertyRef Name="ma_taikhoan" />
+          </Key>
+          <Property Name="ma_taikhoan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ma_nhanvien" Type="Int32" />
+          <Property Name="taikhoan" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="matkhau" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="nhanvien" Relationship="Self.FK__user_acco__ma_nh__33D4B598" FromRole="user_accounts" ToRole="nhanvien" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NameUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="nhanviens" Relationship="Self.FK__nhanvien__roles__29572725" FromRole="UserGroup" ToRole="nhanvien" />
+        </EntityType>
+        <Association Name="FK__bangluong__ma_nh__300424B4">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="bangluong" Type="Self.bangluong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="bangluong">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__leave_req__ma_nh__2D27B809">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="leave_requests" Type="Self.leave_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="leave_requests">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nhanvien__ma_pho__2A4B4B5E">
+          <End Role="phongban" Type="Self.phongban" Multiplicity="0..1" />
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="phongban">
+              <PropertyRef Name="ma_phongban" />
+            </Principal>
+            <Dependent Role="nhanvien">
+              <PropertyRef Name="ma_phongban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nhanvien__roles__29572725">
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="0..1" />
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="nhanvien">
+              <PropertyRef Name="roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__user_acco__ma_nh__33D4B598">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="user_accounts" Type="Self.user_accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="user_accounts">
+              <PropertyRef Name="ma_nhanvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_phongban_quanli">
+          <End Role="nhanvien" Type="Self.nhanvien" Multiplicity="0..1" />
+          <End Role="phongban" Type="Self.phongban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nhanvien">
+              <PropertyRef Name="ma_nhanvien" />
+            </Principal>
+            <Dependent Role="phongban">
+              <PropertyRef Name="ma_quanli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLNSEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bangluongs" EntityType="Self.bangluong" />
+          <EntitySet Name="leave_requests" EntityType="Self.leave_requests" />
+          <EntitySet Name="nhanviens" EntityType="Self.nhanvien" />
+          <EntitySet Name="phongbans" EntityType="Self.phongban" />
+          <EntitySet Name="user_accounts" EntityType="Self.user_accounts" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
+          <AssociationSet Name="FK__bangluong__ma_nh__300424B4" Association="Self.FK__bangluong__ma_nh__300424B4">
+            <End Role="nhanvien" EntitySet="nhanviens" />
+            <End Role="bangluong" EntitySet="bangluongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__leave_req__ma_nh__2D27B809" Association="Self.FK__leave_req__ma_nh__2D27B809">
+            <End Role="nhanvien" EntitySet="nhanviens" />
+            <End Role="leave_requests" EntitySet="leave_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nhanvien__ma_pho__2A4B4B5E" Association="Self.FK__nhanvien__ma_pho__2A4B4B5E">
+            <End Role="phongban" EntitySet="phongbans" />
+            <End Role="nhanvien" EntitySet="nhanviens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nhanvien__roles__29572725" Association="Self.FK__nhanvien__roles__29572725">
+            <End Role="UserGroup" EntitySet="UserGroups" />
+            <End Role="nhanvien" EntitySet="nhanviens" />
+          </AssociationSet>
+          <AssociationSet Name="FK__user_acco__ma_nh__33D4B598" Association="Self.FK__user_acco__ma_nh__33D4B598">
+            <End Role="nhanvien" EntitySet="nhanviens" />
+            <End Role="user_accounts" EntitySet="user_accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_phongban_quanli" Association="Self.FK_phongban_quanli">
+            <End Role="nhanvien" EntitySet="nhanviens" />
+            <End Role="phongban" EntitySet="phongbans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLNSModelStoreContainer" CdmEntityContainer="QLNSEntities1">
+          <EntitySetMapping Name="bangluongs">
+            <EntityTypeMapping TypeName="QLNSModel.bangluong">
+              <MappingFragment StoreEntitySet="bangluong">
+                <ScalarProperty Name="ma_luong" ColumnName="ma_luong" />
+                <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+                <ScalarProperty Name="luongthang" ColumnName="luongthang" />
+                <ScalarProperty Name="bonuses" ColumnName="bonuses" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leave_requests">
+            <EntityTypeMapping TypeName="QLNSModel.leave_requests">
+              <MappingFragment StoreEntitySet="leave_requests">
+                <ScalarProperty Name="leave_id" ColumnName="leave_id" />
+                <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+                <ScalarProperty Name="ngay_batdau" ColumnName="ngay_batdau" />
+                <ScalarProperty Name="ngay_ketthuc" ColumnName="ngay_ketthuc" />
+                <ScalarProperty Name="lydo" ColumnName="lydo" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nhanviens">
+            <EntityTypeMapping TypeName="QLNSModel.nhanvien">
+              <MappingFragment StoreEntitySet="nhanvien">
+                <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+                <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="ma_phongban" ColumnName="ma_phongban" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+                <ScalarProperty Name="luong" ColumnName="luong" />
+                <ScalarProperty Name="roles" ColumnName="roles" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="phongbans">
+            <EntityTypeMapping TypeName="QLNSModel.phongban">
+              <MappingFragment StoreEntitySet="phongban">
+                <ScalarProperty Name="ma_phongban" ColumnName="ma_phongban" />
+                <ScalarProperty Name="ten_phongban" ColumnName="ten_phongban" />
+                <ScalarProperty Name="ma_quanli" ColumnName="ma_quanli" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_accounts">
+            <EntityTypeMapping TypeName="QLNSModel.user_accounts">
+              <MappingFragment StoreEntitySet="user_accounts">
+                <ScalarProperty Name="ma_taikhoan" ColumnName="ma_taikhoan" />
+                <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+                <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="QLNSModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameUS" ColumnName="NameUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

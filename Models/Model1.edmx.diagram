@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="035db9f470f243cba0cbb473b1f9d798" Name="Diagram1">
+        <EntityTypeShape EntityType="QLNSModel.bangluong" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNSModel.leave_requests" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNSModel.nhanvien" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNSModel.phongban" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNSModel.user_accounts" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLNSModel.UserGroup" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="QLNSModel.FK__bangluong__ma_nh__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNSModel.FK__leave_req__ma_nh__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNSModel.FK__nhanvien__ma_pho__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNSModel.FK__nhanvien__roles__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNSModel.FK__user_acco__ma_nh__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="QLNSModel.FK_phongban_quanli" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

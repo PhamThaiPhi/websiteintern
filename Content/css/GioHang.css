@@ -1,0 +1,81 @@
+.box-giohang{
+    display: flex;
+    flex-direction:column;
+    
+}
+
+.giohang {
+    width: 100%;
+    padding: 50px;
+    border-right: 1px solid;
+}
+
+.info-customer{
+    justify-content: center;
+    display: flex;
+}
+
+.form-text input{
+    padding:10px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.cart-detail {
+    z-index:-1; 
+    width: 100%;
+    padding: 50px;
+    background-image: url('https://thumbs.dreamstime.com/z/laptop-wallpaper-set-gift-bag-shopping-process-e-commerce-shop-online-white-background-laptop-wallpaper-set-112047473.jpg')
+}
+
+.title-cart{
+    display: flex;
+    justify-content: center;
+}
+
+.detail-price{
+    justify-content: right;
+}
+
+.cart{
+    width: 100%;
+    text-align: center;
+}
+
+.cart img{
+    width: 50px;    
+}
+
+.cart td input{
+    width: 30px;
+    outline: none;
+}
+
+.cart table{
+    width: 100%;
+}
+
+.Accept {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.Accept button{
+    width: 80px;
+    height: 25px;
+    background-color: red;
+    color: white;
+    border: none;
+}
+@media only screen and (min-width:1024px) {
+    .home {
+        margin-inline: auto;
+        max-width: 1024px;
+    }
+    .box-giohang{flex-direction:row;
+        
+    }
+}
+

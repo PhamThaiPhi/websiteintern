@@ -1,0 +1,59 @@
+﻿@model IEnumerable<webintern.Models.leave_requests>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Quản lí Nghỉ Phép</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Ngày bắt đầu
+        </th>
+        <th>
+            Ngày Kết thúc
+        </th>
+        <th>
+            Lý do
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Mã Nhân viên
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_batdau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_ketthuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lydo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.request_date)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.nhanvien.hoten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditRequest", new { id=item.leave_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.leave_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.leave_id })
+        </td>
+    </tr>
+}
+
+</table>

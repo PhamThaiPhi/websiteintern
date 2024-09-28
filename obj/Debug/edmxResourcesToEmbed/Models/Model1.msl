@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLNSModelStoreContainer" CdmEntityContainer="QLNSEntities1">
+    <EntitySetMapping Name="bangluongs">
+      <EntityTypeMapping TypeName="QLNSModel.bangluong">
+        <MappingFragment StoreEntitySet="bangluong">
+          <ScalarProperty Name="ma_luong" ColumnName="ma_luong" />
+          <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+          <ScalarProperty Name="luongthang" ColumnName="luongthang" />
+          <ScalarProperty Name="bonuses" ColumnName="bonuses" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="leave_requests">
+      <EntityTypeMapping TypeName="QLNSModel.leave_requests">
+        <MappingFragment StoreEntitySet="leave_requests">
+          <ScalarProperty Name="leave_id" ColumnName="leave_id" />
+          <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+          <ScalarProperty Name="ngay_batdau" ColumnName="ngay_batdau" />
+          <ScalarProperty Name="ngay_ketthuc" ColumnName="ngay_ketthuc" />
+          <ScalarProperty Name="lydo" ColumnName="lydo" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="request_date" ColumnName="request_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nhanviens">
+      <EntityTypeMapping TypeName="QLNSModel.nhanvien">
+        <MappingFragment StoreEntitySet="nhanvien">
+          <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+          <ScalarProperty Name="hoten" ColumnName="hoten" />
+          <ScalarProperty Name="ngaysinh" ColumnName="ngaysinh" />
+          <ScalarProperty Name="gioitinh" ColumnName="gioitinh" />
+          <ScalarProperty Name="diachi" ColumnName="diachi" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="ma_phongban" ColumnName="ma_phongban" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+          <ScalarProperty Name="luong" ColumnName="luong" />
+          <ScalarProperty Name="roles" ColumnName="roles" />
+          <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="phongbans">
+      <EntityTypeMapping TypeName="QLNSModel.phongban">
+        <MappingFragment StoreEntitySet="phongban">
+          <ScalarProperty Name="ma_phongban" ColumnName="ma_phongban" />
+          <ScalarProperty Name="ten_phongban" ColumnName="ten_phongban" />
+          <ScalarProperty Name="ma_quanli" ColumnName="ma_quanli" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_accounts">
+      <EntityTypeMapping TypeName="QLNSModel.user_accounts">
+        <MappingFragment StoreEntitySet="user_accounts">
+          <ScalarProperty Name="ma_taikhoan" ColumnName="ma_taikhoan" />
+          <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
+          <ScalarProperty Name="taikhoan" ColumnName="taikhoan" />
+          <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="QLNSModel.UserGroup">
+        <MappingFragment StoreEntitySet="UserGroup">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NameUS" ColumnName="NameUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

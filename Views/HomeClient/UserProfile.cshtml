@@ -1,0 +1,106 @@
+﻿@model webintern.Models.ViewModel
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<style>
+    table {
+        width: 60%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        margin-bottom: 50px;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .table th {
+        text-align: right;
+        background-color: #f2f2f2;
+        width: 20%;
+    }
+
+    .table td {
+        text-align: left;
+    }
+
+    h1 {
+        color: red;
+        text-align: center;
+        font-family: 'Dancing Script', sans-serif;
+        font-size: 60px;
+    }
+</style>
+
+<div style="display:block !important">
+    <h1>Thông Tin Nhân Viên</h1>
+</div>
+
+@if (Model.Nhanvien != null)
+{
+    var nhanvien = Model.Nhanvien;
+
+    <table class="table">
+        <tr>
+            <th>Tên Nhân viên:</th>
+            <td>
+                <span id="hoten">@nhanvien.hoten</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Ngày Sinh:</th>
+            <td>
+                <span id="ngaysinh">@nhanvien.ngaysinh?.ToString("dd/MM/yyyy")</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Giới Tính:</th>
+            <td>
+                <span id="gioitinh">@nhanvien.gioitinh</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Địa Chỉ:</th>
+            <td>
+                <span id="diachi">@nhanvien.diachi</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Số Điện Thoại:</th>
+            <td>
+                <span id="phone_number">@nhanvien.phone_number</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>
+                <span id="email">@nhanvien.email</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Mật Khẩu:</th>
+            <td>
+                <span id="Passwords">@nhanvien.Passwords</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Lương</th>
+            <td>
+                <span id="luong">@nhanvien.luong?.ToString("N0")</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Trạng Thái</th>
+            <td>
+                <span id="trangthai">@nhanvien.trangthai</span>
+            </td>
+        </tr>
+    </table>
+}
+else
+{
+    <p>Không tìm thấy thông tin nhân viên.</p>
+}

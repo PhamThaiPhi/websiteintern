@@ -1,0 +1,123 @@
+﻿@model webintern.Models.leave_requests
+
+@{
+   
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+
+        .container {
+            background-color: #fff; /* White background for form */
+            padding: 20px; /* Padding around form */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        h2 {
+            color: #007bff; /* Bootstrap primary color */
+        }
+
+        h4 {
+            margin-top: 0; /* Remove top margin */
+        }
+
+        hr {
+            height: 2px; /* Thicker horizontal line */
+        }
+
+        .control-label {
+            font-weight: bold; /* Bold labels */
+        }
+
+        .form-control-plaintext {
+            background-color: #e9ecef; /* Light gray background for display fields */
+            padding: 10px; /* Padding inside display fields */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners for display fields */
+        }
+
+        .btn-success {
+            width: 100%; /* Full width button */
+        }
+    </style>
+
+}
+
+<h2 class="text-center mb-4">Edit Leave Request</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="form-horizontal">
+            <h4 class="text-primary">Leave Request Details</h4>
+            <hr class="bg-primary" />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.leave_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ma_nhanvien, "Mã nhân viên", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.ma_nhanvien, new { htmlAttributes = new { @class = "form-control-plaintext" } })
+            </div>
+        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ngay_batdau, "Ngày bắt đầu", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.ngay_batdau, new { htmlAttributes = new { @class = "form-control-plaintext" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ngay_ketthuc, "Ngày kết thúc", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.ngay_ketthuc, new { htmlAttributes = new { @class = "form-control-plaintext" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.lydo, "Lý do", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.lydo, new { htmlAttributes = new { @class = "form-control-plaintext" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.status, "Trạng thái", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("status", new SelectList(new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = "Chưa duyệt", Text = "Chưa duyệt" },
+                        new SelectListItem { Value = "Duyệt", Text = "Duyệt" }
+                    }, "Value", "Text", Model.status), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.request_date, "Ngày yêu cầu", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.request_date, new { htmlAttributes = new { @class = "form-control-plaintext" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save Changes" class="btn btn-success btn-lg" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center mt-4">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary btn-lg" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
